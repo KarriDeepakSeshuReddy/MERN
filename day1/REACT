@@ -1,0 +1,18 @@
+React is a JS library used for building UI especially single page webite
+React don't have its own routing facility(navigation), 
+dont have its own state management tool(data retaining from navigation fromone page to other),
+React don't have its own build method
+it is open source library managed by facebook(Meta)
+
+Angular
+it has frame work
+It has routing facility,stage management, own build methods
+managed by gooogle
+component based architecture
+Reusability
+declare your part rest is handle by React js
+little optimized(virtual) and fast(single page)
+external library accessibility
+
+
+VIRTUAL DOM
