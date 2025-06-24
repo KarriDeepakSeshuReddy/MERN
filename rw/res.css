@@ -1,0 +1,142 @@
+.navbar{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%;
+   
+}
+#logo{
+    margin-left: 10%;
+    height: 20px;
+    margin-top: -5%;
+}
+#address{
+    width: 400px;
+    height: auto;
+    margin-right:13%;
+    margin-left:13%;
+    margin-top: -5%;
+
+}
+#login{
+    width: 200px;
+    height: 80px;
+    margin-top: -2%;
+    margin-right: 50%;
+}
+#bg{
+    width: 102%;
+    margin-left: -1%;
+    margin-top: -2%;
+    height: 500px;
+}
+#title{
+    margin-top: -35%;
+    display: flex;
+    margin-left: 10%;
+    width: 50%;
+}
+#image{
+    margin-left: 60%;
+    margin-top: -15.8%;
+    width: 40%;
+
+}
+#deals{
+    width: 96%;
+    margin-left: 2.5%;
+    margin-top: 2%;
+}
+#how{
+    width: 100%;
+    margin-top: 3%;
+}
+#tc{
+    width: 80%;
+    margin-top: 2%;
+    margin-left: 9.75%;
+    
+
+}
+#sb{
+    width: 99%;
+    margin-top: -19%;
+    display: flex;
+}
+#fr{
+    width: 90%;
+    margin-top: 15%;
+    margin-left: 5%;
+}
+#s{
+    width:101.5%;
+
+}
+#sec{
+    width:100%;
+}
+#footer{
+    width: 103%;
+    display: flex;
+    
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .card {
+    width: 250px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background-color: #fff;
+  }
+  
+  .card img {
+    width: 100%;
+    display: block;
+  }
+  
+  .discount {
+    position: absolute;
+    background: orange;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 0 10px 10px 0;
+    top: 10px;
+    left: 0;
+    font-size: 18px;
+  }
+  
+  .card-content {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .card-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .remaining {
+    background-color: #ffe0db;
+    color: #e05238;
+    padding: 6px 12px;
+    display: inline-block;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  

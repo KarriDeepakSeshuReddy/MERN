@@ -1,0 +1,11 @@
+web api is the main reason to make javascript asynchronous
+web api is the apis which has the acessibility of all the brower accesses
+Browser
+it is able to communicate with external server
+it has a timer(set time out)
+access of the location,display,mic, camera,speaker, bluetooth,notification,console
+it has its own local storage(like cookies)
+it can access to file system
+
+micro task queue(high priority):- fetch
+call back queue(low priority):-call back function

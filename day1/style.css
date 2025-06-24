@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  .site-header {
+    background-color: rgb(169, 197, 197);
+    padding: 20px;
+    text-align: center;
+    border-bottom: 3px solid #ccc;
+  }
+  
+  .site-header h2 {
+    margin: 0;
+  }
+  
+  .nav {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 0;
+    margin-top: 10px;
+  }
+  
+  .main-content {
+    padding: 30px;
+    max-width: 600px;
+    margin: auto;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .student-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    padding: 8px;
+    border: 1px solid #999;
+    border-radius: 4px;
+  }
+  
+  .submit-btn {
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    background-color: #005fa3;
+  }
+  
+  .site-footer {
+    background-color: #eaeaea;
+    padding: 20px;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    border-top: 2px solid #ccc;
+  }
+  
+  .footer-info {
+    max-width: 400px;
+  }
+  
+  .footer-links {
+    display: flex;
+    gap: 30px;
+  }
+  
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-links a {
+    text-decoration: none;
+    color: #0077cc;
+  }
+  
+  .footer-links a:hover {
+    text-decoration: underline;
+  }
+  
