@@ -76,3 +76,5 @@ function updateWallet() {
   console.log("Update wallet");
 }
 login(()=>addItemToCart(()=>createOrder(()=>payOrder(()=>createOrderSummary(()=>updateWallet())))));
+
+//NOTE -Promises
