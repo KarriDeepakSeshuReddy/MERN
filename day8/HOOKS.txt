@@ -1,0 +1,13 @@
+React component utilize two primary components to influence what is displayed on the screen pros and state
+while props are passed to a component , satte is managed within a component
+Props drilling happens when you pass props through multiple components, even though only the final (deeply nested) component needs the data.
+Hooks:
+use state
+use effect
+use memo
+use call back
+use ref
+
+use state is an object has the values of state variable, set statefunction
+syntax of use state:
+const[setVariable(Current state value), setStateFunction(it updates the value)] = useState(initialValue);
