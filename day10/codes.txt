@@ -1,0 +1,831 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\srira> net start MongoDB
+The requested service has already been started.
+
+More help is available by typing NET HELPMSG 2182.
+
+PS C:\Users\srira> mongosh
+Current Mongosh Log ID: 685e1cce99a537765e748a5e
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.3
+Using MongoDB:          8.0.10
+Using Mongosh:          2.5.3
+test> show dbs
+admin   40.00 KiB
+config  72.00 KiB
+local   40.00 KiB
+test> db
+test
+test> use ecommerce
+switched to db ecommerce
+ecommerce> show dbs
+admin    40.00 KiB
+config  108.00 KiB
+local    40.00 KiB
+ecommerce> use test
+switched to db test
+test> show dbs
+admin    40.00 KiB
+config  108.00 KiB
+local    40.00 KiB
+test> use test
+already on db test
+test> use ecommerce
+switched to db ecommerce
+ecommerce> db.version
+[Function: version] AsyncFunction {
+  apiVersions: [ 0, 0 ],
+  returnsPromise: true,
+  serverVersions: [ '0.0.0', '999.999.999' ],
+  topologies: [ 'ReplSet', 'Sharded', 'LoadBalanced', 'Standalone' ],
+  returnType: { type: 'unknown', attributes: {} },
+  deprecated: false,
+  platforms: [ 'Compass', 'Browser', 'CLI' ],
+  isDirectShellCommand: false,
+  acceptsRawInput: false,
+  shellCommandCompleter: undefined,
+  newShellCommandCompleter: undefined,
+  help: [Function (anonymous)] Help
+}
+ecommerce> db.version()
+8.0.10
+ecommerce> db.dropDatabase()
+{ ok: 1, dropped: 'ecommerce' }
+ecommerce> use test
+switched to db test
+test> db collections
+Uncaught:
+SyntaxError: Missing semicolon. (1:2)
+
+> 1 | db collections
+    |   ^
+  2 |
+
+test> show collections
+
+test> show dbs
+admin    40.00 KiB
+config  108.00 KiB
+local    40.00 KiB
+test> use colleges
+switched to db colleges
+colleges> db
+colleges
+colleges> show collections
+
+colleges> db.createCollection("students")
+{ ok: 1 }
+colleges> show collections
+students
+colleges> db.createCollection("mentors")
+{ ok: 1 }
+colleges> show collections
+\mentors
+students
+colleges> show collections
+mentors
+students
+colleges> db.mentors.insertOne({"name": "Sriram","experience": 6})
+{
+  acknowledged: true,
+  insertedId: ObjectId('685e22cd745c1ff703748a5f')
+}
+colleges> db.mentors.insertMany([{"name":"Salaar","experience":3},{"name":"Rebel","experience":8}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('685e2417745c1ff703748a60'),
+    '1': ObjectId('685e2417745c1ff703748a61')
+  }
+}
+colleges> db.mentors.insert([{"name":"Bahu","experience":15},{"name":"Raja","experience":5}])
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('685e2501745c1ff703748a62'),
+    '1': ObjectId('685e2501745c1ff703748a63')
+  }
+}
+colleges> show dbs
+admin      40.00 KiB
+colleges   80.00 KiB
+config    108.00 KiB
+local      40.00 KiB
+colleges> db.mentors.find()
+[
+  {
+    _id: ObjectId('685e22cd745c1ff703748a5f'),
+    name: 'Sriram',
+    experience: 6
+  },
+  {
+    _id: ObjectId('685e2417745c1ff703748a60'),
+    name: 'Salaar',
+    experience: 3
+  },
+  {
+    _id: ObjectId('685e2417745c1ff703748a61'),
+    name: 'Rebel',
+    experience: 8
+  },
+  {
+    _id: ObjectId('685e2501745c1ff703748a62'),
+    name: 'Bahu',
+    experience: 15
+  },
+  {
+    _id: ObjectId('685e2501745c1ff703748a63'),
+    name: 'Raja',
+    experience: 5
+  }
+]
+colleges> db.mentors.findOne()
+{
+  _id: ObjectId('685e22cd745c1ff703748a5f'),
+  name: 'Sriram',
+  experience: 6
+}
+colleges> db.mentors.find({name:"Raja"})
+[
+  {
+    _id: ObjectId('685e2501745c1ff703748a63'),
+    name: 'Raja',
+    experience: 5
+  }
+]
+colleges> db.mentors.findOne({name:"Raja"})
+{
+  _id: ObjectId('685e2501745c1ff703748a63'),
+  name: 'Raja',
+  experience: 5
+}
+colleges> db.mentors.findOne({name:"Raja","experience": 15})
+null
+colleges> db.mentors.findOne({name:"Raja","experience": 5})
+{
+  _id: ObjectId('685e2501745c1ff703748a63'),
+  name: 'Raja',
+  experience: 5
+}
+colleges> db.mentors.find({"name":"Munit"})
+
+colleges> db.mentors.find({}).count()
+5
+colleges> db.mentors.findOne({}).count()
+TypeError: db.mentors.findOne({}).count is not a function
+colleges> db.mentors.find({experience: {$gt:5}})
+[
+  {
+    _id: ObjectId('685e22cd745c1ff703748a5f'),
+    name: 'Sriram',
+    experience: 6
+  },
+  {
+    _id: ObjectId('685e2417745c1ff703748a61'),
+    name: 'Rebel',
+    experience: 8
+  },
+  {
+    _id: ObjectId('685e2501745c1ff703748a62'),
+    name: 'Bahu',
+    experience: 15
+  }
+]
+colleges> db.mentors.find({experience: {$lt:10}})
+[
+  {
+    _id: ObjectId('685e22cd745c1ff703748a5f'),
+    name: 'Sriram',
+    experience: 6
+  },
+  {
+    _id: ObjectId('685e2417745c1ff703748a60'),
+    name: 'Salaar',
+    experience: 3
+  },
+  {
+    _id: ObjectId('685e2417745c1ff703748a61'),
+    name: 'Rebel',
+    experience: 8
+  },
+  {
+    _id: ObjectId('685e2501745c1ff703748a63'),
+    name: 'Raja',
+    experience: 5
+  }
+]
+colleges> db.mentors.find({experience: {$lte:15}})
+[
+  {
+    _id: ObjectId('685e22cd745c1ff703748a5f'),
+    name: 'Sriram',
+    experience: 6
+  },
+  {
+    _id: ObjectId('685e2417745c1ff703748a60'),
+    name: 'Salaar',
+    experience: 3
+  },
+  {
+    _id: ObjectId('685e2417745c1ff703748a61'),
+    name: 'Rebel',
+    experience: 8
+  },
+  {
+    _id: ObjectId('685e2501745c1ff703748a62'),
+    name: 'Bahu',
+    experience: 15
+  },
+  {
+    _id: ObjectId('685e2501745c1ff703748a63'),
+    name: 'Raja',
+    experience: 5
+  }
+]
+colleges> db.mentors.find({experience: 5})
+[
+  {
+    _id: ObjectId('685e2501745c1ff703748a63'),
+    name: 'Raja',
+    experience: 5
+  }
+]
+colleges> db.mentors.find({name: {$in: ["Bahu","aja"]}})
+[
+  {
+    _id: ObjectId('685e2501745c1ff703748a62'),
+    name: 'Bahu',
+    experience: 15
+  }
+]
+colleges> db.mentors.find({name: {$in: ["Bahu","Raja"]}})
+[
+  {
+    _id: ObjectId('685e2501745c1ff703748a62'),
+    name: 'Bahu',
+    experience: 15
+  },
+  {
+    _id: ObjectId('685e2501745c1ff703748a63'),
+    name: 'Raja',
+    experience: 5
+  }
+]
+colleges> db.mentors.update({"name":"Munit"})
+DeprecationWarning: Collection.update() is deprecated. Use updateOne, updateMany, or bulkWrite.
+MongoshInvalidInputError: [COMMON-10001] Missing required argument at position 1 (Collection.update)
+colleges> db.mentors.update({"name":"Munit",experience:9})
+MongoshInvalidInputError: [COMMON-10001] Missing required argument at position 1 (Collection.update)
+colleges> db.mentors.updateOne({name:"Sriram"},{})
+MongoInvalidArgumentError: Update document requires atomic operators
+colleges> db.mentors.updateOne({name:"Sriram"},{$set:{experience:7})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:57)
+
+> 1 | db.mentors.updateOne({name:"Sriram"},{$set:{experience:7})
+    |                                                          ^
+  2 |
+
+colleges> db.mentors.updateOne({name:"Sriram"},{$set:{experience:7})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:57)
+
+> 1 | db.mentors.updateOne({name:"Sriram"},{$set:{experience:7})
+    |                                                          ^
+  2 |
+
+colleges>db.mentors.updateOne({_id : ObjectId('685e22cd745c1ff703748a5f')},{$set:{experience:7 }})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+colleges> db.mentors.find({experience: 7})
+[
+  {
+    _id: ObjectId('685e22cd745c1ff703748a5f'),
+    name: 'Sriram',
+    experience: 7
+  }
+]
+colleges> db.mentors.updateMany({experience :{$gte:7}},{$set:{subject:["MERN","DSA"]}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 3,
+  modifiedCount: 3,
+  upsertedCount: 0
+}
+colleges> db.mentors.find()
+[
+  {
+    _id: ObjectId('685e22cd745c1ff703748a5f'),
+    name: 'Sriram',
+    experience: 7,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e2417745c1ff703748a60'),
+    name: 'Salaar',
+    experience: 3
+  },
+  {
+    _id: ObjectId('685e2417745c1ff703748a61'),
+    name: 'Rebel',
+    experience: 8,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e2501745c1ff703748a62'),
+    name: 'Bahu',
+    experience: 15,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e2501745c1ff703748a63'),
+    name: 'Raja',
+    experience: 5
+  }
+]
+colleges> db.mentors.updateOne({name: "Sourav"},{$set:{experience:9,subject:["Game Development"]}},{upsert:true})
+{
+  acknowledged: true,
+  insertedId: ObjectId('685e37b728d6ce6487188332'),
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 1
+}
+colleges> db.mentors.find()
+[
+  {
+    _id: ObjectId('685e22cd745c1ff703748a5f'),
+    name: 'Sriram',
+    experience: 7,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e2417745c1ff703748a60'),
+    name: 'Salaar',
+    experience: 3
+  },
+  {
+    _id: ObjectId('685e2417745c1ff703748a61'),
+    name: 'Rebel',
+    experience: 8,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e2501745c1ff703748a62'),
+    name: 'Bahu',
+    experience: 15,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e2501745c1ff703748a63'),
+    name: 'Raja',
+    experience: 5
+  },
+  {
+    _id: ObjectId('685e37b728d6ce6487188332'),
+    name: 'Sourav',
+    experience: 9,
+    subject: [ 'Game Development' ]
+  }
+]
+colleges>
+
+
+
+
+
+//MY CODES
+Last login: Fri Jun 27 09:50:35 on ttys011
+(base) deepak@Deepaks-MacBook-Pro ~ % mongosh
+Current Mongosh Log ID:	685e348b9fdb02a2deb99472
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.3
+Using MongoDB:		8.0.10
+Using Mongosh:		2.5.3
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2025-06-27T09:21:51.495+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2025-06-27T09:21:51.495+05:30: This server is bound to localhost. Remote systems will be unable to connect to this server. Start the server with --bind_ip <address> to specify which IP addresses it should serve responses from, or with --bind_ip_all to bind to all interfaces. If this behavior is desired, start the server with --bind_ip 127.0.0.1 to disable this warning
+   2025-06-27T09:21:51.495+05:30: Soft rlimits for open file descriptors too low
+------
+
+test> show dbs
+admin      40.00 KiB
+colleges   80.00 KiB
+config    108.00 KiB
+local      40.00 KiB
+test> colleges
+ReferenceError: colleges is not defined
+test> use colleges
+switched to db colleges
+colleges> show collection
+MongoshInvalidInputError: [COMMON-10001] 'collection' is not a valid argument for "show".
+colleges> show collections
+mentors
+students
+colleges> db.mentors.find()
+[
+  {
+    _id: ObjectId('685e231c1a71546f63bf541f'),
+    name: 'Deepak',
+    Experience: 6
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5420'),
+    name: 'Deepak',
+    Experience: 6
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5421'),
+    name: 'Sriram',
+    Experience: 10
+  },
+  {
+    _id: ObjectId('685e25c21a71546f63bf5422'),
+    name: 'Jaga',
+    Experience: 6
+  }
+]
+colleges> db.mentors.updateOne({_id: ObjectId('685e231c1a71546f63bf541f')},{$set:{experience:7}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+colleges> db.mentors.find({experience:7})
+[
+  {
+    _id: ObjectId('685e231c1a71546f63bf541f'),
+    name: 'Deepak',
+    Experience: 6,
+    experience: 7
+  }
+]
+colleges> db.mentors.updateOne({_id: ObjectId('685e231c1a71546f63bf541f')},{$unset:{experience:6}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+colleges> db.mentors.find({experience:7})
+
+colleges> db.mentors.updateOne({_id: ObjectId('685e231c1a71546f63bf541f')},{$unset:{Experience:6}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+colleges> db.mentors.find({experience:7})
+
+colleges>  db.mentors.find({experience:6})
+
+colleges>  db.mentors.find()
+[
+  { _id: ObjectId('685e231c1a71546f63bf541f'), name: 'Deepak' },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5420'),
+    name: 'Deepak',
+    Experience: 6
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5421'),
+    name: 'Sriram',
+    Experience: 10
+  },
+  {
+    _id: ObjectId('685e25c21a71546f63bf5422'),
+    name: 'Jaga',
+    Experience: 6
+  }
+]
+colleges> db.mentors.updateOne({_id: ObjectId('685e231c1a71546f63bf541f')},{$set:{Experience:7}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+colleges> db. db.mentors.find()
+
+colleges> db.mentors.find()
+[
+  {
+    _id: ObjectId('685e231c1a71546f63bf541f'),
+    name: 'Deepak',
+    Experience: 7
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5420'),
+    name: 'Deepak',
+    Experience: 6
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5421'),
+    name: 'Sriram',
+    Experience: 10
+  },
+  {
+    _id: ObjectId('685e25c21a71546f63bf5422'),
+    name: 'Jaga',
+    Experience: 6
+  }
+]
+colleges> db.mentors.updateMany({experience :{$gte:7}},{$set:{subject:["MERN","DSA"]}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+colleges> db.mentors.find()
+[
+  {
+    _id: ObjectId('685e231c1a71546f63bf541f'),
+    name: 'Deepak',
+    Experience: 7
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5420'),
+    name: 'Deepak',
+    Experience: 6
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5421'),
+    name: 'Sriram',
+    Experience: 10
+  },
+  {
+    _id: ObjectId('685e25c21a71546f63bf5422'),
+    name: 'Jaga',
+    Experience: 6
+  }
+]
+colleges> db.mentors.updateMany({Experience :{$gte:7}},{$set:{subject:["MERN","DSA"]}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+colleges> db.mentors.find()
+[
+  {
+    _id: ObjectId('685e231c1a71546f63bf541f'),
+    name: 'Deepak',
+    Experience: 7,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5420'),
+    name: 'Deepak',
+    Experience: 6
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5421'),
+    name: 'Sriram',
+    Experience: 10,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e25c21a71546f63bf5422'),
+    name: 'Jaga',
+    Experience: 6
+  }
+]
+colleges> db.mentors.updateMany({Experience :{$gte:6}},{$set:{subject:["MERN","DSA"]}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+colleges> db.mentors.find()
+[
+  {
+    _id: ObjectId('685e231c1a71546f63bf541f'),
+    name: 'Deepak',
+    Experience: 7,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5420'),
+    name: 'Deepak',
+    Experience: 6,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5421'),
+    name: 'Sriram',
+    Experience: 10,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e25c21a71546f63bf5422'),
+    name: 'Jaga',
+    Experience: 6,
+    subject: [ 'MERN', 'DSA' ]
+  }
+]
+colleges> db.mentors.updateOne({_id: ObjectId('685e25c21a71546f63bf5422')},{$set:{Experience:4}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+colleges> db.mentors.find()
+[
+  {
+    _id: ObjectId('685e231c1a71546f63bf541f'),
+    name: 'Deepak',
+    Experience: 7,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5420'),
+    name: 'Deepak',
+    Experience: 6,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5421'),
+    name: 'Sriram',
+    Experience: 10,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e25c21a71546f63bf5422'),
+    name: 'Jaga',
+    Experience: 4,
+    subject: [ 'MERN', 'DSA' ]
+  }
+]
+colleges> db.mentors.updateMany({Experience :{$gte:6}},{$set:{subject:["MERN","DSA"]}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 3,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+colleges> db.mentors.find()
+[
+  {
+    _id: ObjectId('685e231c1a71546f63bf541f'),
+    name: 'Deepak',
+    Experience: 7,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5420'),
+    name: 'Deepak',
+    Experience: 6,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5421'),
+    name: 'Sriram',
+    Experience: 10,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e25c21a71546f63bf5422'),
+    name: 'Jaga',
+    Experience: 4,
+    subject: [ 'MERN', 'DSA' ]
+  }
+]
+colleges> db.mentors.updateMany({Experience :{$lt:6}},{$unset:{subject:["MERN","DSA"]}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+colleges> db.mentors.find()
+[
+  {
+    _id: ObjectId('685e231c1a71546f63bf541f'),
+    name: 'Deepak',
+    Experience: 7,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5420'),
+    name: 'Deepak',
+    Experience: 6,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5421'),
+    name: 'Sriram',
+    Experience: 10,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e25c21a71546f63bf5422'),
+    name: 'Jaga',
+    Experience: 4
+  }
+]
+colleges> db.mentors.updateOne({name: "Sourav"},{$set:{experience:9,subject:["Game Development"]}},{upsert:true})
+{
+  acknowledged: true,
+  insertedId: ObjectId('685e3866095ff7801b70ae4e'),
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 1
+}
+colleges> db.mentors.find()
+[
+  {
+    _id: ObjectId('685e231c1a71546f63bf541f'),
+    name: 'Deepak',
+    Experience: 7,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5420'),
+    name: 'Deepak',
+    Experience: 6,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e24f21a71546f63bf5421'),
+    name: 'Sriram',
+    Experience: 10,
+    subject: [ 'MERN', 'DSA' ]
+  },
+  {
+    _id: ObjectId('685e25c21a71546f63bf5422'),
+    name: 'Jaga',
+    Experience: 4
+  },
+  {
+    _id: ObjectId('685e3866095ff7801b70ae4e'),
+    name: 'Sourav',
+    experience: 9,
+    subject: [ 'Game Development' ]
+  }
+]
+colleges> 
+
+
+
+
+
+db.students.insertMany(
+[
+  {"name": "Amit Sharma", "rollNo": "CSE001","branch": "CSE","year": 2,"email": "amit.sharma@example.com","marks": {"maths": 78,"physics": 85,"chemistry": 72},"isHosteller": true},
+  {"name": "Pooja Verma","rollNo": "ECE002","branch": "ECE","year": 3,"email": "pooja.verma@example.com","marks": { "maths": 67,"physics": 74,"chemistry": 69},"isHosteller": false},
+  {"name": "Rahul Kumar","rollNo": "ME003","branch": "ME","year": 1,"email": "rahul.kumar@example.com","marks": {"maths": 82,"physics": 79,"chemistry": 88},"isHosteller": true},
+  {"name": "Anjali Singh","rollNo": "CSE004","branch": "CSE","year": 4,"email": "anjali.singh@example.com","marks": {"maths": 91,"physics": 92,"chemistry": 89},"isHosteller": false}
+])
+
+
+questions
+Create
+Insert a new student into the collection with your own details.
+Add 3 students in one command using insertMany.
+
+Read
+Find all students in the CSE branch.
+Find students who are in 2nd year and are hostellers.
+Find the student who scored more than 90 in Maths.
+Show name and branch of all students (only those fields).
+Count the number of students in CSE branch.
+Get all students sorted by their Physics marks in descending order.
+
+Update
+Update the Chemistry marks of roll number "CSE001" to 80.
+Add a new field cgpa with default value 8.0 to all students.
+Change hosteller status to false for all 4th-year students.
+Rename the field branch to department.
+
+Delete
+Delete the student whose roll number is "ECE002".
+Delete all students who are in 1st year.

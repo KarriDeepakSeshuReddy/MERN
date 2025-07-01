@@ -1,0 +1,44 @@
+DataBase : A database is an organized collection of data that can be easily accessed,managed,updated
+
+Types of Databases?
+databases are primarily two Types
+1.Relational Databases(SQL)
+    stored data in tables (rows and coloumns)
+    tables can be related using keys
+    use SQL to manage data
+    eg = MySQL , portgreSQL ,  SQLite , microsoft SQL server
+2.Non-Relational Databases(NoSQL)
+    stored data in JSON-like documnents,key-value pairs, graphs etc
+
+Data is stored in tables(like Excel spreadsheets)
+
+1. Relational Databases
+Data Is stored in tables (lIke Excel spreadsheets)
+Tables with defined schema
+* Strong ACID compliance (Atomicity, Consistency, Isolation, Durability)
+* Ideal for:
+* Financial systems
+* Inventory systems
+* Applications needing complex JOINs
+Important Concepts:
+* Primary Key
+* Foreign Key
+* Normalization
+* Relationships: One-to-One, One-to-Many, Many-to-Many Pros:
+* Strong data consistency
+* Powerful querying with SOL
+* Good for complex relationships
+Cons:
+* Rigid schema
+* Scaling horizontally Is harder
+2. Non-Relational Databases?
+Data is stored in flexible formats, most commonly documents (lIke JSON).
+
+Atomicity: All or Nothing
+if A is transfering Rs2000 to B 
+there are 3 steps involved in it
+1. ammount check of a
+2.Ammount Deduct from a
+3.Ammount credit of B
+
+

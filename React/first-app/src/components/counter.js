@@ -54,44 +54,41 @@
 
 // export default Timer;
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 
 function Timer() {
   const [time, setTime] = useState(0);
-  const timerRef = useRef(null); 
+  //   let interval = null;
+  const [interval, setInter] = useState(null);
 
   function startTimer() {
-    if (timerRef.current !== null) return; 
-
-    timerRef.current = setInterval(() => {
-      setTime(prevTime => prevTime + 1); 
+    // setInterval(() => {
+    //     setTime(time+1)
+    // }, 1000)
+    const i = setInterval(() => {
+      setTime((prev) => prev + 1);
     }, 1000);
+    // interval = i;
+    setInter(i);
   }
-
   function stopTimer() {
-    clearInterval(timerRef.current);
-    timerRef.current = null;
+    clearInterval(interval);
+    // interval = null;
+    setInter(null);
   }
-
   function resetTimer() {
-    stopTimer();
     setTime(0);
   }
 
-  // Clean up when component unmounts
-  useEffect(() => {
-    return () => clearInterval(timerRef.current);
-  }, []);
-
   return (
     <main style={{ textAlign: "center" }}>
-      <h1>Timer: {time} seconds</h1>
+      <h1>Timer: {time}</h1>
       <div>
         <button onClick={startTimer}>Start</button>
-        &nbsp;&nbsp;
-        <button onClick={stopTimer}>Stop</button>
-        &nbsp;&nbsp;
-        <button onClick={resetTimer}>Reset</button>
+        &nbsp; &nbsp;
+        <button onClick={stopTimer}>Stop </button>
+        &nbsp; &nbsp;
+        <button onClick={resetTimer}>Reset </button>
       </div>
     </main>
   );

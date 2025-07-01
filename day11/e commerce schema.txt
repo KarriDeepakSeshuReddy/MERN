@@ -1,0 +1,49 @@
+User:{
+    _id:
+    name:
+    username:
+    email:
+    password:
+    Dob:
+    last_login:
+    createdAt:
+}
+
+Orders{
+    _id:
+    userId:
+    productIds:  
+    status:            
+    createdAt:
+    totalAmount: 
+
+
+}
+
+Products{
+    _id:
+    name:
+    description:
+    price:
+    stock:[bool , int]
+    category:
+    createdAt:
+}
+
+ratings{
+    _id:
+    orderId:
+    userId: 
+    productId: 
+    stars:          
+    review:         
+    createdAt: 
+
+}
+
+
+Requirements:
+User->login,signin
+Orders->status
+Products
+ratings->star ratings

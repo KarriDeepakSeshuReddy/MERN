@@ -33,13 +33,16 @@
 
 import "./App.css";
 import React from "react";
-
-import Counter from "./components/counter";
+// import Counter from "./components/Counter";
+// import Timer from "./components/Timer";
+import Conditional from "./components/Conditional";
 
 function App() {
   return (
     <div className="App">
-     <Counter/>
+      {/* <Counter /> */}
+      {/* <Timer /> */}
+      <Conditional />
     </div>
   );
 }

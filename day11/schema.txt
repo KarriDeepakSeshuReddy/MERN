@@ -1,0 +1,4 @@
+my requirements are user,videos,likes/dislikes,comments->reply then 
+user:{_id,name,username,email,password,DoB,lastlogin,createdAt}, 
+videos:{_id,title,description,src,thumbnail,likescount,dislikes count,creatorId:(ref  to user ),created At}, 
+likes:{_id,userId,videoId,createdId
